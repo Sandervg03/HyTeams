@@ -1,0 +1,30 @@
+.main {
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+
+nav {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    padding: 0 20px;
+    color: black;
+}
+
+a:any-link {
+    color: black;
+}
+
+nav .anchor {
+    text-decoration: none;
+    padding: 20px 30px;
+}
+
+nav .anchor:hover {
+    background-color: rgb(167, 167, 167);
+}
+
+#logo {
+    cursor: pointer;
+}
