@@ -1,0 +1,7 @@
+PORT: 
+DB_HOST: 
+DB_SCHEMA: 
+DB_USERNAME: 
+DB_PASSWORD: 
+
+// Copy and paste this file as config.env and fill in your details.
