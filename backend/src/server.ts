@@ -24,7 +24,16 @@ sequelize.sync()
   .catch((err) => { console.log(err) });
 
 
-const port = process.env.PORT || 4000;
+app.get("/isLoggedIn", (req, res) => {
+  res.status(200).json(isLoggedIn());
+});
+
+function isLoggedIn(): boolean {
+  return true;
+}
+
+
+const port = process.env.PORT || 4001;
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
 });
