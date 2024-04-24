@@ -6,16 +6,19 @@ import { Observable, retry } from 'rxjs';
   providedIn: 'root',
 })
 export class UserService implements OnInit {
-
   constructor(private http: HttpClient) {}
 
-  ngOnInit(): void {
-    
-  }
+  ngOnInit(): void {}
 
   public isLoggedIn(): Observable<boolean> {
     return this.http
-      .get<boolean>('http://localhost:4001/isLoggedIn')
+     .get<boolean>('http://localhost:4001/isLoggedIn')
+     .pipe(retry(3));
+  }
+
+  public registerUser(user: any): Observable<any> {
+    return this.http
+      .post<any>('http://localhost:4001/registerUser', user)
       .pipe(retry(3));
   }
 }

@@ -1,1 +1,13 @@
-<p>register works!</p>
+<main class="main">
+    <article class="article">
+        <h1>Register</h1>
+        <p>New to HyTeams? Register an account here.</p>
+        <p>If you already have an account, login <a routerLink="/login">here</a></p>
+    </article>
+    <form class="register">
+        <label for="username">Username</label><input type="text" class="username" id="username"><br>
+        <label for="email">Email</label><input type="text" class="email" id="email"><br>
+        <section id="errorHandling"></section>
+        <button type="button" class="register-button" (click)="registerUser()">Register</button>
+    </form>
+</main>
