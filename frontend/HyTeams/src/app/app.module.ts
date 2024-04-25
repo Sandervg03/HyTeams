@@ -14,6 +14,9 @@ import { TeamsComponent } from './components/teams/teams.component';
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 import { ProfileComponent } from './components/profile/profile.component';
+import { HttpClientModule } from '@angular/common/http';
+import { BuildProjectComponent } from './components/build-project/build-project.component';
+import { MyTeamComponent } from './components/my-team/my-team.component';
 
 @NgModule({
   declarations: [
@@ -26,8 +29,10 @@ import { ProfileComponent } from './components/profile/profile.component';
     LoginComponent,
     RegisterComponent,
     ProfileComponent,
+    BuildProjectComponent,
+    MyTeamComponent,
   ],
-  imports: [BrowserModule, AppRoutingModule],
+  imports: [BrowserModule, AppRoutingModule, HttpClientModule],
   providers: [provideClientHydration()],
   bootstrap: [AppComponent],
 })

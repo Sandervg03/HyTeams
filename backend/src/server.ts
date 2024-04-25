@@ -28,6 +28,12 @@ app.get("/isLoggedIn", (req, res) => {
   res.status(200).json(isLoggedIn());
 });
 
+
+app.post("/registerUser", (req, res) => {
+  res.status(200).json({_email: req.body._email, _username: req.body._username});
+});
+
+
 function isLoggedIn(): boolean {
   return true;
 }

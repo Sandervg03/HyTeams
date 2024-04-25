@@ -20,7 +20,7 @@ export class RegisterComponent implements OnInit {
     console.log('Registering user')
     try {
       this.userService.registerUser(new User('username', 'email'))
-      .subscribe((data) => { data instanceof User ? this.router.navigate(['/login']) : console.log('Error') });
+      .subscribe((data) => { data._email && data._username ? this.router.navigate(['/login']) : console.log('Incorrect data') });
     } catch (error: any) {
       const element: HTMLElement = document.getElementById('errorHandling') as HTMLElement;
       element.innerHTML = error.message;

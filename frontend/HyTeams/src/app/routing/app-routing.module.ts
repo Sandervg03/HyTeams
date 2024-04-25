@@ -6,6 +6,8 @@ import { TeamsComponent } from '../components/teams/teams.component';
 import { LoginComponent } from '../components/login/login.component';
 import { RegisterComponent } from '../components/register/register.component';
 import { ProfileComponent } from '../components/profile/profile.component';
+import { BuildProjectComponent } from '../components/build-project/build-project.component';
+import { MyTeamComponent } from '../components/my-team/my-team.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -15,6 +17,8 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'profile', component: ProfileComponent },
+  { path: 'build-project', component: BuildProjectComponent },
+  { path: 'my-team', component: MyTeamComponent}
 ];
 
 @NgModule({
