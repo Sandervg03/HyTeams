@@ -5,7 +5,7 @@ const app = express();
 app.use(function (req, res, next) {
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
-  res.setHeader("Access-Control-Allow-Headers","X-requested-With, content-type");
+  res.setHeader("Access-Control-Allow-Headers", "X-requested-With, content-type");
   res.setHeader("Access-Control-Allow-Credentials", "true");
   next();
 });
@@ -19,10 +19,19 @@ config.config({ path: "./config.env" });
 
 
 import { sequelize } from "./data/database/sequelizePool";
+import { UserController } from "./controller/userController";
+import { UserService } from "./business/service/userService";
+import { UserSequelize } from "./data/sequelize/userSequelize";
 sequelize.sync()
   .then((result) => { console.log(result) })
   .catch((err) => { console.log(err) });
 
+/**
+ * User Layers
+ */
+const userData: UserSequelize = new UserSequelize();
+const userService: UserService = new UserService(userData);
+const userController: UserController = new UserController(userService);
 
 app.get("/isLoggedIn", (req, res) => {
   res.status(200).json(isLoggedIn());
@@ -30,7 +39,7 @@ app.get("/isLoggedIn", (req, res) => {
 
 
 app.post("/registerUser", (req, res) => {
-  res.status(200).json({_email: req.body._email, _username: req.body._username});
+  userController.registerUser(req, res);
 });
 
 
