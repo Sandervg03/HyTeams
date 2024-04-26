@@ -14,11 +14,34 @@ export class UserService {
             throw new Error("Failed to create user.");
         } else {
             let code: string = crypto.randomBytes(20).toString('hex');
-            while (this.data.getPasswordCode(code) == null) {
-                code = crypto.randomBytes(20).toString('hex')};
+            while (this.data.getPasswordCode(code, user.email) == null) {
+                code = crypto.randomBytes(20).toString('hex')
+            };
             await this.data.setPasswordCode(code, user.email);
             await sendUserRegistrationMail(user.email, user.username, code).then((result) => console.log(result)).catch((error) => console.log(error.message));
             return user;
+        }
+    }
+
+    public async findActivationCode(code: string, email: string): Promise<boolean | string> {
+        const activationCode: string | null = await this.data.getPasswordCode(code, email);
+        if (activationCode == null) {
+            return false;
+        } else {
+            return activationCode;
+        }
+    }
+
+    public async activateUser(password: string, email: string, code: string): Promise<string> {
+        const activated: boolean = await this.data.setPassword(await bcrypt.hash(password, await bcrypt.genSalt(10)), email);
+        if (activated == false) {
+            throw new Error("Failed to activate user.");
+        } else {
+            if (await this.data.updatePasswordCode(code)) {
+                return "User activated.";
+            } else {
+                throw new Error("Failed to activate user.");
+            }
         }
     }
 }

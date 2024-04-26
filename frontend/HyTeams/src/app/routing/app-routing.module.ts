@@ -8,7 +8,7 @@ import { RegisterComponent } from '../components/register/register.component';
 import { ProfileComponent } from '../components/profile/profile.component';
 import { BuildProjectComponent } from '../components/build-project/build-project.component';
 import { MyTeamComponent } from '../components/my-team/my-team.component';
-import { ActivateComponent } from '../activate/activate.component';
+import { ActivateComponent } from '../components/activate/activate.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -19,7 +19,7 @@ const routes: Routes = [
   { path: 'register', component: RegisterComponent },
   { path: 'profile', component: ProfileComponent },
   { path: 'build-project', component: BuildProjectComponent },
-  { path: 'my-team', component: MyTeamComponent},
+  { path: 'my-team', component: MyTeamComponent },
   { path: 'activate', component: ActivateComponent }
 ];
 
@@ -27,4 +27,4 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }

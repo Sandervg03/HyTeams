@@ -17,7 +17,7 @@ import { ProfileComponent } from './components/profile/profile.component';
 import { HttpClientModule } from '@angular/common/http';
 import { BuildProjectComponent } from './components/build-project/build-project.component';
 import { MyTeamComponent } from './components/my-team/my-team.component';
-import { ActivateComponent } from './activate/activate.component';
+import { ActivateComponent } from './components/activate/activate.component';
 
 @NgModule({
   declarations: [
@@ -38,4 +38,4 @@ import { ActivateComponent } from './activate/activate.component';
   providers: [provideClientHydration()],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule { }

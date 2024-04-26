@@ -34,7 +34,7 @@ const userService: UserService = new UserService(userData);
 const userController: UserController = new UserController(userService);
 
 app.get("/isLoggedIn", (req, res) => {
-  res.status(200).json(isLoggedIn());
+  res.status(200).json(true);
 });
 
 
@@ -42,9 +42,17 @@ app.post("/registerUser", (req, res) => {
   userController.registerUser(req, res);
 });
 
+app.post("/activateUser", isPasswordCode, (req, res) => {
+  userController.activateUser(req, res);
+})
 
-function isLoggedIn(): boolean {
-  return true;
+
+async function isPasswordCode(req: express.Request, res: express.Response, next: express.NextFunction) {
+  if (!await userService.findActivationCode(req.body.code, req.body.email)) {
+    res.status(400).json({ message: "Code not found." });
+  } else {
+    next();
+  }
 }
 
 

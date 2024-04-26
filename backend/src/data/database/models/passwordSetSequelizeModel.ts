@@ -22,4 +22,11 @@ export default class SequelizePasswordCodeModel extends Model {
         }
     })
     declare email: string;
+
+    @Column({
+        type: DataType.STRING,
+        allowNull: false,
+        primaryKey: false,
+    })
+    declare status: string;
 }
