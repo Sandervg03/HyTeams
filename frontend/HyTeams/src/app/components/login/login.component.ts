@@ -24,7 +24,7 @@ export class LoginComponent implements OnInit {
         .subscribe((response: boolean) => { 
           this.router.navigate(['/home']); }, 
         (error: any) => { 
-          this.error = error.message; 
+          this.error = error.error; 
         });
     } catch (error: any) {
       this.error = error.message;

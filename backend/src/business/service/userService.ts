@@ -1,5 +1,6 @@
 import { UserSequelize } from "../../data/sequelize/userSequelize";
 import { sendUserRegistrationMail } from "../../util/emails/registerUserEmail";
+import { SessionIdGenerator } from "../../util/generators/sessionId";
 import { Password } from "../model/passwordModel";
 import { User } from "../model/userModel";
 import bcrypt from 'bcrypt';
@@ -43,6 +44,22 @@ export class UserService {
             } else {
                 throw new Error("Failed to activate user.");
             }
+        }
+    }
+
+    public async findUser(email: string): Promise<User | null> {
+        return this.data.findUser(email)
+    }
+
+    public async loginUser(email: string, password: string): Promise<string> {
+        const hashedPassword: string | null = await this.data.getPassword(email);
+        if (hashedPassword == null) {
+            throw new Error("No active user found.");
+        }
+        if (await bcrypt.compare(password, hashedPassword)) {
+            return this.data.setSessionId(email, new SessionIdGenerator().generateSessionId());
+        } else {
+            throw new Error("Incorrect password.");
         }
     }
 }
