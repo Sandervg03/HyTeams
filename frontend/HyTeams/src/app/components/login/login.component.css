@@ -1,0 +1,46 @@
+main {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    background: linear-gradient(to bottom, #264779, #7e90df);
+}
+
+.login {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #325EA0;
+    border-radius: 10px;
+    padding: 20px;
+    margin: 20px;
+}
+
+.login input {
+    margin: 10px;
+    padding: 10px;
+    border-radius: 5px;
+    border: none;
+}
+
+.login label {
+    margin-top: 10px;
+}
+
+.login .login-button {
+    margin-top: 20px;
+    padding: 10px;
+    border-radius: 5px;
+    border: none;
+    background-color: #264779;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+article {
+    width: 22%;
+}
