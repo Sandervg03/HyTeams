@@ -1,5 +1,6 @@
 import express from "express";
 import cookieparser from "cookie-parser";
+import * as validator from 'email-validator';
 
 const app = express();
 app.use(function (req, res, next) {
@@ -33,11 +34,6 @@ const userData: UserSequelize = new UserSequelize();
 const userService: UserService = new UserService(userData);
 const userController: UserController = new UserController(userService);
 
-app.get("/isLoggedIn", (req, res) => {
-  res.status(200).json(true);
-});
-
-
 app.post("/registerUser", (req, res) => {
   userController.registerUser(req, res);
 });
@@ -46,6 +42,13 @@ app.post("/activateUser", isPasswordCode, (req, res) => {
   userController.activateUser(req, res);
 })
 
+app.post("/loginUser", isUser, (req, res) => {
+  userController.loginUser(req, res);
+});
+
+app.get("/isLoggedIn", (req, res) => {
+  res.status(200).json(true);
+});
 
 async function isPasswordCode(req: express.Request, res: express.Response, next: express.NextFunction) {
   if (!await userService.findActivationCode(req.body._code, req.body._email)) {
@@ -55,6 +58,18 @@ async function isPasswordCode(req: express.Request, res: express.Response, next:
   }
 }
 
+async function isUser(req: express.Request, res: express.Response, next: express.NextFunction) {
+  if (validator.validate(req.body._email) == true) {
+    if (await userService.findUser(req.body._email) == null) {
+      res.status(400).json("User not found.");
+    } else {
+      next();
+    }
+  } else {
+    res.status(400).json("Incorrect email.");
+  
+  }
+}
 
 const port = process.env.PORT || 4001;
 app.listen(port, () => {

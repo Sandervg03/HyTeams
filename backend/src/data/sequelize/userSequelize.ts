@@ -2,6 +2,7 @@ import { User } from "../../business/model/userModel";
 import { UserMapping } from "../../util/mapping/userMapping";
 import SequelizePasswordModel from "../database/models/passwordSequelizeModel";
 import SequelizePasswordCodeModel from "../database/models/passwordSetSequelizeModel";
+import SequelizeSessionModel from "../database/models/sessionSequelizeModel";
 import SequelizeUserModel from "../database/models/userSequelizeModel";
 import { UserInterface } from "../interfaces/userInterface";
 
@@ -54,6 +55,34 @@ export class UserSequelize implements UserInterface {
             return true;
         } else {
             return false;
+        }
+    }
+
+    public async getPassword(email: string): Promise<string | null> {
+        const find: SequelizePasswordModel | null = await SequelizePasswordModel.findOne({ where: { email: email } });
+        if (find && find.password) {
+            return find.password;
+        } else {
+            return null;
+        }
+    }
+
+    public async findUser(email: string): Promise<User | null> {
+        const find: SequelizeUserModel | null = await SequelizeUserModel.findOne({ where: { email: email } });
+        if (find && find.email) {
+            return this.userMapping.mapUser(find);
+        } else {
+            return null;
+        }
+    }
+
+    public async setSessionId(sessionId: string, email: string): Promise<string> {
+        const create: SequelizeSessionModel | null = await SequelizeSessionModel.create({ email: email, sessionid: sessionId });
+        const createdSession: SequelizeSessionModel | null = await SequelizeSessionModel.findOne({ where: { email: email, sessionid: sessionId } });
+        if (createdSession && createdSession.sessionid) {
+            return createdSession.sessionid;
+        } else {
+            throw new Error("Failed to set session id.");
         }
     }
 }

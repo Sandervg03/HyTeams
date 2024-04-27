@@ -19,12 +19,25 @@ export class UserController {
     public async activateUser(req: express.Request, res: express.Response) {
         try {
             if (req.body._password == req.body._confirmPassword) {
-            res.status(202).json(await this.service.activateUser(new Password(req.body._password), req.body._email, req.body._code));
+                res.status(202).json(await this.service.activateUser(new Password(req.body._password), req.body._email, req.body._code));
             } else {
                 throw new Error("Passwords do not match.");
             }
         } catch (error: any) {
-            res.status(400).json(error.message );
+            res.status(400).json(error.message);
+        }
+    }
+
+    public async loginUser(req: express.Request, res: express.Response) {
+        try {
+            if (req.body._password) {
+                res.cookie("sessionId", await this.service.loginUser(req.body._email, req.body._password), { httpOnly: true, signed: true });
+                res.status(202).json("User logged in.");
+            } else {
+                throw new Error("Password is required.");
+            }
+        } catch (error: any) {
+            res.status(400).json(error.message);
         }
     }
 
