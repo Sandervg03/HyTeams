@@ -21,4 +21,10 @@ export class UserService implements OnInit {
       .post<any>('http://localhost:4001/registerUser', user)
       .pipe(retry(3));
   }
+
+  public activateUser(email: string, code: string, password: string, confirmPassword: string): Observable<any> {
+    return this.http
+      .post<any>('http://localhost:4001/activateUser', {_email: email, _code: code, _password: password, _confirmPassword: confirmPassword})
+      .pipe(retry(3));
+  }
 }

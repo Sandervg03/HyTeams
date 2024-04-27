@@ -1,0 +1,17 @@
+main {
+    display: flex;
+    height: 75vh;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    background: linear-gradient(to bottom, #264779, #7e90df);
+}
+
+article{
+    display: flex;
+    width: 50%;
+    justify-content: center;
+    align-items: center;
+}

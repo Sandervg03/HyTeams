@@ -48,8 +48,8 @@ app.post("/activateUser", isPasswordCode, (req, res) => {
 
 
 async function isPasswordCode(req: express.Request, res: express.Response, next: express.NextFunction) {
-  if (!await userService.findActivationCode(req.body.code, req.body.email)) {
-    res.status(400).json({ message: "Code not found." });
+  if (!await userService.findActivationCode(req.body._code, req.body._email)) {
+    res.status(400).json("Code not found.");
   } else {
     next();
   }

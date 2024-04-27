@@ -9,6 +9,9 @@ import { ProfileComponent } from '../components/profile/profile.component';
 import { BuildProjectComponent } from '../components/build-project/build-project.component';
 import { MyTeamComponent } from '../components/my-team/my-team.component';
 import { ActivateComponent } from '../components/activate/activate.component';
+import { RegisterSuccessComponent } from '../components/register-success/register-success.component';
+import { ContactComponent } from '../components/contact/contact.component';
+import { ReportComponent } from '../components/report/report.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -20,7 +23,10 @@ const routes: Routes = [
   { path: 'profile', component: ProfileComponent },
   { path: 'build-project', component: BuildProjectComponent },
   { path: 'my-team', component: MyTeamComponent },
-  { path: 'activate', component: ActivateComponent }
+  { path: 'activate', component: ActivateComponent },
+  { path: 'register-success', component: RegisterSuccessComponent },
+  { path: 'contact', component: ContactComponent },
+  { path: 'report', component: ReportComponent },
 ];
 
 @NgModule({

@@ -1,5 +1,6 @@
 import { UserSequelize } from "../../data/sequelize/userSequelize";
 import { sendUserRegistrationMail } from "../../util/emails/registerUserEmail";
+import { Password } from "../model/passwordModel";
 import { User } from "../model/userModel";
 import bcrypt from 'bcrypt';
 import crypto from 'crypto';
@@ -11,7 +12,7 @@ export class UserService {
     public async registerUser(user: User): Promise<User> {
         const createdUser: User | null = await this.data.registerUser(user);
         if (createdUser == null) {
-            throw new Error("Failed to create user.");
+            throw new Error("Email already exists.");
         } else {
             let code: string = crypto.randomBytes(20).toString('hex');
             while (this.data.getPasswordCode(code, user.email) == null) {
@@ -32,8 +33,8 @@ export class UserService {
         }
     }
 
-    public async activateUser(password: string, email: string, code: string): Promise<string> {
-        const activated: boolean = await this.data.setPassword(await bcrypt.hash(password, await bcrypt.genSalt(10)), email);
+    public async activateUser(password: Password, email: string, code: string): Promise<string> {
+        const activated: boolean = await this.data.setPassword(await bcrypt.hash(password.password, await bcrypt.genSalt(10)), email);
         if (activated == false) {
             throw new Error("Failed to activate user.");
         } else {

@@ -10,6 +10,9 @@ import * as validator from 'email-validator';
   styleUrl: './register.component.css',
 })
 export class RegisterComponent implements OnInit {
+
+  error: string | null = null;
+
   constructor(private userService: UserService, private router: Router) { }
 
   ngOnInit(): void { }
@@ -21,13 +24,13 @@ export class RegisterComponent implements OnInit {
       const usernameElement: HTMLInputElement = document.getElementById('username') as HTMLInputElement;
       this.userService.registerUser(new User(usernameElement.value, emailElement.value))
         .subscribe((data) => {
-          data._email && data._username ?
-            this.router.navigate(['/activate']) : console.log('Something went wrong.');
+          this.router.navigate(['/register-success']);
+        }, (error) => {
+          this.error = error.error;
         });
-        setTimeout(() => { element.innerHTML = 'Email already exists.' }, 1000);  
     } catch (error: any) {
       const element: HTMLElement = document.getElementById('errorHandling') as HTMLElement;
-      element.innerHTML = error.message;
+      this.error = error.message;
     }
   }
 }

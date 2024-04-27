@@ -1,1 +1,14 @@
-<p>activate works!</p>
+<main class="main">
+    <article class="article">
+        <h1>Activate</h1>
+        <p>Please Enter your activation code, email and the password you want to use.</p>
+    </article>
+    <form class="activate">
+        <label for="email">Email</label><input type="text" class="email" id="email"><br>
+        <label for="activationCode">Activation code</label><input type="text" class="activationCode" id="activationCode"><br>
+        <label for="password">Password</label><input type="password" class="password" id="password"><br>
+        <label for="confirmPassword">Confirm password</label><input type="password" class="password" id="confirmPassword"><br>
+        <section *ngIf="error" id="errorHandling">{{error}}</section>
+        <button type="button" class="activate-button" (click)="activateUser()">Activate</button>
+    </form>
+</main>

@@ -1,8 +1,5 @@
 import { NgModule } from '@angular/core';
-import {
-  BrowserModule,
-  provideClientHydration,
-} from '@angular/platform-browser';
+import { BrowserModule, provideClientHydration } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './routing/app-routing.module';
 import { AppComponent } from './components/main/app.component';
@@ -18,6 +15,9 @@ import { HttpClientModule } from '@angular/common/http';
 import { BuildProjectComponent } from './components/build-project/build-project.component';
 import { MyTeamComponent } from './components/my-team/my-team.component';
 import { ActivateComponent } from './components/activate/activate.component';
+import { RegisterSuccessComponent } from './components/register-success/register-success.component';
+import { ContactComponent } from './components/contact/contact.component';
+import { ReportComponent } from './components/report/report.component';
 
 @NgModule({
   declarations: [
@@ -33,6 +33,9 @@ import { ActivateComponent } from './components/activate/activate.component';
     BuildProjectComponent,
     MyTeamComponent,
     ActivateComponent,
+    RegisterSuccessComponent,
+    ContactComponent,
+    ReportComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, HttpClientModule],
   providers: [provideClientHydration()],

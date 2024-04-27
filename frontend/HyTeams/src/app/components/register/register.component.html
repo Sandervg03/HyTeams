@@ -7,7 +7,7 @@
     <form class="register">
         <label for="username">Username</label><input type="text" class="username" id="username"><br>
         <label for="email">Email</label><input type="text" class="email" id="email"><br>
-        <section id="errorHandling"></section>
+        <section *ngIf="error" id="errorHandling">{{error}}</section>
         <button type="button" class="register-button" (click)="registerUser()">Register</button>
     </form>
 </main>

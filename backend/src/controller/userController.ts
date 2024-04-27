@@ -1,3 +1,4 @@
+import { Password } from "../business/model/passwordModel";
 import { User } from "../business/model/userModel";
 import { UserService } from "../business/service/userService";
 import express from 'express';
@@ -11,15 +12,19 @@ export class UserController {
             const user: User = new User(req.body._username, req.body._email);
             res.status(202).json(await this.service.registerUser(user));
         } catch (error: any) {
-            res.status(400).json({ error: error.message });
+            res.status(400).json(error.message);
         }
     }
 
     public async activateUser(req: express.Request, res: express.Response) {
         try {
-            res.status(202).json(await this.service.activateUser(req.body.password, req.body.email, req.body.code));
+            if (req.body._password == req.body._confirmPassword) {
+            res.status(202).json(await this.service.activateUser(new Password(req.body._password), req.body._email, req.body._code));
+            } else {
+                throw new Error("Passwords do not match.");
+            }
         } catch (error: any) {
-            res.status(400).json({ error: error.message });
+            res.status(400).json(error.message );
         }
     }
 

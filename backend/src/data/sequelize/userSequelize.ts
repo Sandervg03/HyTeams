@@ -20,7 +20,7 @@ export class UserSequelize implements UserInterface {
     }
 
     public async getPasswordCode(code: string, email: string): Promise<string | null> {
-        const find: SequelizePasswordCodeModel | null = await SequelizePasswordCodeModel.findOne({ where: { code: code, email: email} });
+        const find: SequelizePasswordCodeModel | null = await SequelizePasswordCodeModel.findOne({ where: { code: code, email: email, status: "Active"} });
         if (find && find.code) {
             return find.email;
         } else {

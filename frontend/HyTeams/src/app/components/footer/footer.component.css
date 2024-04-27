@@ -1,0 +1,25 @@
+.main {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas: 
+    "contact info";
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+.contact {
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 20px;
+}
+
+.socials {
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 20px;
+}
+
+#discord {
+    color: #551A8B;
+    text-decoration: underline;
+    cursor: pointer;
+}
