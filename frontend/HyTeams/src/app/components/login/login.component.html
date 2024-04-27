@@ -1,1 +1,12 @@
-<p>login works!</p>
+<main class="main">
+    <article class="article">
+        <h1>Login</h1>
+        <p>Login by entering your email and password.</p>
+    </article>
+    <form class="login">
+        <label for="email">Email</label><input type="text" class="email" id="email"><br>
+        <label for="password">Password</label><input type="password" class="password" id="password"><br>
+        <section *ngIf="error" id="errorHandling">{{error}}</section>
+        <button type="button" class="login-button" (click)="loginUser()">Login</button>
+    </form>
+</main>
