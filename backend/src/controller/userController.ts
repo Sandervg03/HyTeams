@@ -31,8 +31,8 @@ export class UserController {
     public async loginUser(req: express.Request, res: express.Response) {
         try {
             if (req.body._password) {
-                res.cookie("sessionId", await this.service.loginUser(req.body._email, req.body._password), { httpOnly: true, signed: true });
-                res.status(202).json("User logged in.");
+                const sessionId: string = await this.service.loginUser(req.body._email, req.body._password)
+                res.status(202).json(sessionId);
             } else {
                 throw new Error("Password is required.");
             }

@@ -57,9 +57,13 @@ export class UserService {
             throw new Error("No active user found.");
         }
         if (await bcrypt.compare(password, hashedPassword)) {
-            return this.data.setSessionId(email, new SessionIdGenerator().generateSessionId());
+            return this.data.setSessionId(new SessionIdGenerator().generateSessionId(), email);
         } else {
             throw new Error("Incorrect password.");
         }
+    }
+
+    public async isLoggedIn(code: string): Promise<boolean> {
+        return await this.data.findSessionId(code);
     }
 }

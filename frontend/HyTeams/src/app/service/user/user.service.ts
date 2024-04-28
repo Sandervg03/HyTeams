@@ -1,5 +1,5 @@
 import { Injectable, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
 export class UserService implements OnInit {
   constructor(private http: HttpClient) { }
 
-  ngOnInit(): void { }
+  ngOnInit(): void {  }
 
   public registerUser(user: any): Observable<any> {
     return this.http
@@ -21,8 +21,9 @@ export class UserService implements OnInit {
   }
 
   public isLoggedIn(): Observable<boolean> {
+    console.log("sent")
     return this.http
-      .get<boolean>('http://localhost:4001/isLoggedIn')
+      .get<boolean>('http://localhost:4001/isLoggedIn', { headers: { 'credentials': "true" } } )
   }
 
   public loginUser(email: string, password: string): Observable<boolean> {

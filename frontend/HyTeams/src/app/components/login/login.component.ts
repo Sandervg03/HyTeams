@@ -21,7 +21,8 @@ export class LoginComponent implements OnInit {
       const emailInput: HTMLInputElement = document.getElementById('email') as HTMLInputElement;
       const passwordInput: HTMLInputElement = document.getElementById('password') as HTMLInputElement;
       this.service.loginUser(emailInput.value, passwordInput.value)
-        .subscribe((response: boolean) => { 
+        .subscribe((response) => {
+          document.cookie = `sessionid=${response}; SameSite=None; path=/; Secure=true; Expires=new Date(Date.now()+31536000000)`;
           this.router.navigate(['/home']); }, 
         (error: any) => { 
           this.error = error.error; 

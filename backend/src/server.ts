@@ -1,5 +1,5 @@
 import express from "express";
-import cookieparser from "cookie-parser";
+import cookieParser from "cookie-parser";
 import * as validator from 'email-validator';
 
 const app = express();
@@ -12,7 +12,7 @@ app.use(function (req, res, next) {
 });
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(cookieparser());
+app.use(cookieParser());
 
 
 import config from "dotenv";
@@ -46,8 +46,16 @@ app.post("/loginUser", isUser, (req, res) => {
   userController.loginUser(req, res);
 });
 
-app.get("/isLoggedIn", (req, res) => {
-  res.status(200).json(true);
+app.get("/isLoggedIn", async (req, res) => {
+  if (req.cookies.sessionid) {
+    if (await userService.isLoggedIn(req.cookies.sessionid) == true) {
+      res.status(200).json(true);
+    } else {
+      res.status(200).json(false);
+    }
+  } else {
+    res.status(200).json(false);
+  }
 });
 
 async function isPasswordCode(req: express.Request, res: express.Response, next: express.NextFunction) {
@@ -67,7 +75,7 @@ async function isUser(req: express.Request, res: express.Response, next: express
     }
   } else {
     res.status(400).json("Incorrect email.");
-  
+
   }
 }
 

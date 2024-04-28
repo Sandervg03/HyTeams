@@ -85,4 +85,13 @@ export class UserSequelize implements UserInterface {
             throw new Error("Failed to set session id.");
         }
     }
+
+    public async findSessionId(code: string): Promise<boolean> {
+        const find: SequelizeSessionModel | null = await SequelizeSessionModel.findOne({ where: { sessionid: code } });
+        if (find && find.sessionid) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }

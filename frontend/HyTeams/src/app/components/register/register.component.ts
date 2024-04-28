@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { UserService } from '../../service/user/user.service';
 import { User } from '../../models/User';
 import { Router } from '@angular/router';
-import * as validator from 'email-validator';
 
 @Component({
   selector: 'app-register',
