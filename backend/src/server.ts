@@ -4,7 +4,7 @@ import * as validator from 'email-validator';
 
 const app = express();
 app.use(function (req, res, next) {
-  res.setHeader("Access-Control-Allow-Origin", "*");
+  res.setHeader("Access-Control-Allow-Origin", "http://localhost:4200");
   res.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
   res.setHeader("Access-Control-Allow-Headers", "X-requested-With, content-type");
   res.setHeader("Access-Control-Allow-Credentials", "true");
@@ -48,11 +48,9 @@ app.post("/loginUser", isUser, (req, res) => {
 
 app.get("/isLoggedIn", async (req, res) => {
   if (req.cookies.sessionid) {
-    if (await userService.isLoggedIn(req.cookies.sessionid) == true) {
-      res.status(200).json(true);
-    } else {
-      res.status(200).json(false);
-    }
+    await userService.isLoggedIn(req.cookies.sessionid) == true ? 
+    res.status(200).json(true):
+    res.status(200).json(false);
   } else {
     res.status(200).json(false);
   }

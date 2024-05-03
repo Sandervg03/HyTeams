@@ -22,12 +22,4 @@ export default class SequelizeSessionModel extends Model {
         primaryKey: true
     })
     declare sessionid: string;
-
-    @Column({
-        type: DataType.DATE,
-        allowNull: false,
-        primaryKey: false,
-        defaultValue: new Date(Date.now() + 31536000000) // 1 year
-    })
-    declare expires: Date
 }
