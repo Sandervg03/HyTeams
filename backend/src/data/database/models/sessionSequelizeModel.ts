@@ -22,4 +22,10 @@ export default class SequelizeSessionModel extends Model {
         primaryKey: true
     })
     declare sessionid: string;
+
+    @Column({
+        type: DataType.DATE,
+        allowNull: false
+    })
+    declare expires: Date;
 }

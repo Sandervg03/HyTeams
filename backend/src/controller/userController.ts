@@ -32,7 +32,7 @@ export class UserController {
         try {
             if (req.body._password) {
                 const sessionId: string = await this.service.loginUser(req.body._email, req.body._password)
-                res.cookie("sessionid", sessionId, {sameSite: "none", httpOnly: true});
+                res.cookie("sessionId", sessionId, { httpOnly: true, secure: true, sameSite: "strict" });
                 res.status(202).json("Logged in.");
             } else {
                 throw new Error("Password is required.");

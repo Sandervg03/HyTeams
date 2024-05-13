@@ -46,15 +46,31 @@ app.post("/loginUser", isUser, (req, res) => {
   userController.loginUser(req, res);
 });
 
-app.get("/isLoggedIn", async (req, res) => {
-  if (req.cookies.sessionid) {
-    await userService.isLoggedIn(req.cookies.sessionid) == true ? 
-    res.status(200).json(true):
-    res.status(200).json(false);
+app.post("/isLoggedIn", async (req, res) => {
+  if (req.cookies.sessionId) {
+    if (await userService.isLoggedIn(req.cookies.sessionId) == true) {
+      res.status(200).json(true)
+    } else {
+      res.clearCookie("sessionId");
+      res.status(200).json(false);
+    }
   } else {
     res.status(200).json(false);
   }
 });
+
+async function isLoggedIn(req: express.Request, res: express.Response, next: express.NextFunction) {
+  if (req.cookies.sessionId) {
+    if (await userService.isLoggedIn(req.cookies.sessionId) == true) {
+      next();
+    } else {
+      res.clearCookie("sessionId");
+      res.status(200).json(false);
+    }
+  } else {
+    res.status(200).json(false);
+  }
+}
 
 async function isPasswordCode(req: express.Request, res: express.Response, next: express.NextFunction) {
   if (!await userService.findActivationCode(req.body._code, req.body._email)) {

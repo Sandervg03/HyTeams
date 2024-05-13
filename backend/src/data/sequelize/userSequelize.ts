@@ -77,7 +77,7 @@ export class UserSequelize implements UserInterface {
     }
 
     public async setSessionId(sessionId: string, email: string): Promise<string> {
-        const create: SequelizeSessionModel | null = await SequelizeSessionModel.create({ email: email, sessionid: sessionId });
+        const create: SequelizeSessionModel | null = await SequelizeSessionModel.create({ email: email, sessionid: sessionId, expires: new Date(Date.now() + 31556926000) });
         const createdSession: SequelizeSessionModel | null = await SequelizeSessionModel.findOne({ where: { email: email, sessionid: sessionId } });
         if (createdSession && createdSession.sessionid) {
             return createdSession.sessionid;
