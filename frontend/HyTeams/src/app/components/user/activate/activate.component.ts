@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { UserService } from '../../service/user/user.service';
+import { UserService } from '../../../service/user/user.service';
 import { Router } from '@angular/router';
 
 @Component({
@@ -19,15 +19,14 @@ export class ActivateComponent implements OnInit {
   activateUser() {
     try {
       const emailInput: HTMLInputElement = document.getElementById('email') as HTMLInputElement;
-      const activationCodeInput: HTMLInputElement = document.getElementById('activationCode') as HTMLInputElement;
       const password: HTMLInputElement = document.getElementById('password') as HTMLInputElement;
       const confirmPassword: HTMLInputElement = document.getElementById('confirmPassword') as HTMLInputElement;
-      this.service.activateUser(emailInput.value, activationCodeInput.value, password.value, confirmPassword.value)
-      .subscribe((response: any) => {
-        this.router.navigate(['/login']);
-      }, (error: any) => {
-        this.error = error.error;
-      });
+      this.service.activateUser(emailInput.value, password.value, confirmPassword.value, document.location.search.split('=')[1])
+        .subscribe((response: any) => {
+          this.router.navigate(['/login']);
+        }, (error: any) => {
+          this.error = error.error;
+        });
     } catch (error: any) {
       this.error = error.message;
     }

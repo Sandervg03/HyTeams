@@ -1,5 +1,5 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { UserService } from '../../service/user/user.service';
+import { UserService } from '../../../service/user/user.service';
 import { DOCUMENT } from '@angular/common';
 
 @Component({
@@ -13,12 +13,12 @@ export class HeaderComponent implements OnInit {
   constructor(
     private userService: UserService,
     @Inject(DOCUMENT) private document: Document
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.userService.isLoggedIn()
       .subscribe((status: boolean) => {
-      this.loggedIn = status;
-    });
+        this.loggedIn = status;
+      });
   }
 }

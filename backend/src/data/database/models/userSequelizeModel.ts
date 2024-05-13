@@ -18,4 +18,16 @@ export default class SequelizeUserModel extends Model {
         primaryKey: false
     })
     declare username: string;
+
+    @Column({
+        type: DataType.STRING,
+        allowNull: false,
+        primaryKey: false,
+        references: {
+            model: 'userroles',
+            key: 'role'
+        },
+        defaultValue: 'user'
+    })
+    declare role: string;
 }

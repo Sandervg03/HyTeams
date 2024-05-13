@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { UserService } from '../../service/user/user.service';
+import { UserService } from '../../../service/user/user.service';
 import { Router } from '@angular/router';
 
 @Component({
@@ -22,9 +22,9 @@ export class LoginComponent implements OnInit {
       const passwordInput: HTMLInputElement = document.getElementById('password') as HTMLInputElement;
       this.service.loginUser(emailInput.value, passwordInput.value)
         .subscribe((data) => {
-          window.location.href = "/home"; 
-        }, (error: any) => { 
-          this.error = error.error; 
+          window.location.href = "/home";
+        }, (error: any) => {
+          this.error = error.error;
         });
     } catch (error: any) {
       this.error = error.message;
