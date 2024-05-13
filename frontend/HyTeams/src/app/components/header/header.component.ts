@@ -16,23 +16,9 @@ export class HeaderComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.userService.isLoggedIn().subscribe((status: boolean) => {
+    this.userService.isLoggedIn()
+      .subscribe((status: boolean) => {
       this.loggedIn = status;
-      this.addNavigation();
     });
-  }
-
-  addNavigation() {
-    if (this.loggedIn == true) {
-      const profileAnchor: HTMLAnchorElement = this.document.querySelector(
-        '#profile'
-      ) as HTMLAnchorElement;
-      profileAnchor.style.display = 'block';
-    } else {
-      const loginAnchor: HTMLAnchorElement = this.document.querySelector(
-        '#login'
-      ) as HTMLAnchorElement;
-      loginAnchor.style.display = 'block';
-    }
   }
 }

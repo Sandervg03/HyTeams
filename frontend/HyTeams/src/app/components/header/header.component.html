@@ -4,7 +4,7 @@
     <a class="anchor" routerLink="/home">Home</a>
     <a class="anchor" routerLink="/about-us">About Us</a>
     <a class="anchor" routerLink="/teams">Teams</a>
-    <a class="anchor" id="login" routerLink="/login" style="display: none;">Login</a>
-    <a class="anchor" id="profile" routerLink="/profile" style="display: none;">Profile</a>
+    <a *ngIf="loggedIn == false" class="anchor" id="login" routerLink="/login">Login</a>
+    <a *ngIf="loggedIn == true" class="anchor" id="profile" routerLink="/profile">Profile</a>
   </nav>
 </main>

@@ -22,9 +22,9 @@ export class LoginComponent implements OnInit {
       const passwordInput: HTMLInputElement = document.getElementById('password') as HTMLInputElement;
       this.service.loginUser(emailInput.value, passwordInput.value)
         .subscribe((data) => {
-          this.router.navigate(['/home']); 
+          window.location.href = "/home"; 
         }, (error: any) => { 
-          this.error = error.error.message; 
+          this.error = error.error; 
         });
     } catch (error: any) {
       this.error = error.message;

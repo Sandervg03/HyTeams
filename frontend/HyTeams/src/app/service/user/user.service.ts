@@ -1,5 +1,5 @@
 import { Injectable, OnInit } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -22,7 +22,7 @@ export class UserService implements OnInit {
 
   public isLoggedIn(): Observable<boolean> {
     return this.http
-      .get<boolean>('http://localhost:4001/isLoggedIn', { withCredentials: true })
+      .post<boolean>('http://localhost:4001/isLoggedIn', { }, { withCredentials: true })
   }
 
   public loginUser(email: string, password: string): Observable<boolean> {
