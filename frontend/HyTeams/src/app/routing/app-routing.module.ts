@@ -4,7 +4,7 @@ import { HomeComponent } from '../components/home/home.component';
 import { AboutUsComponent } from '../components/website information/about-us/about-us.component';
 import { TeamsComponent } from '../components/teams/all-teams/teams.component';
 import { LoginComponent } from '../components/user/login/login.component';
-import { RegisterComponent } from '../components/user/register/register.component';
+import { UserRegisterComponent } from '../components/user/register/register.component';
 import { ProfileComponent } from '../components/user/profile/profile.component';
 import { BuildProjectComponent } from '../components/website information/build-project/build-project.component';
 import { MyTeamComponent } from '../components/teams/my-team/my-team.component';
@@ -12,6 +12,7 @@ import { ActivateComponent } from '../components/user/activate/activate.componen
 import { RegisterSuccessComponent } from '../components/user/register-success/register-success.component';
 import { ContactComponent } from '../components/website information/contact/contact.component';
 import { ReportComponent } from '../components/website information/report/report.component';
+import { TeamRegisterComponent } from '../components/teams/register/register.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -19,7 +20,7 @@ const routes: Routes = [
   { path: 'about-us', component: AboutUsComponent },
   { path: 'teams', component: TeamsComponent },
   { path: 'login', component: LoginComponent },
-  { path: 'register', component: RegisterComponent },
+  { path: 'register', component: UserRegisterComponent },
   { path: 'profile', component: ProfileComponent },
   { path: 'build-project', component: BuildProjectComponent },
   { path: 'my-team', component: MyTeamComponent },
@@ -27,6 +28,7 @@ const routes: Routes = [
   { path: 'register-success', component: RegisterSuccessComponent },
   { path: 'contact', component: ContactComponent },
   { path: 'report', component: ReportComponent },
+  { path: 'team-register', component: TeamRegisterComponent },
 ];
 
 @NgModule({

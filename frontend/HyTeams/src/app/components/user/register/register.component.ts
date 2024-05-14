@@ -8,7 +8,7 @@ import { Router } from '@angular/router';
   templateUrl: './register.component.html',
   styleUrl: './register.component.css',
 })
-export class RegisterComponent implements OnInit {
+export class UserRegisterComponent implements OnInit {
 
   error: string | null = null;
 

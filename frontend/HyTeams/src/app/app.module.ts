@@ -9,7 +9,7 @@ import { FooterComponent } from './components/website structure/footer/footer.co
 import { AboutUsComponent } from './components/website information/about-us/about-us.component';
 import { TeamsComponent } from './components/teams/all-teams/teams.component';
 import { LoginComponent } from './components/user/login/login.component';
-import { RegisterComponent } from './components/user/register/register.component';
+import { UserRegisterComponent } from './components/user/register/register.component';
 import { ProfileComponent } from './components/user/profile/profile.component';
 import { HttpClientModule } from '@angular/common/http';
 import { BuildProjectComponent } from './components/website information/build-project/build-project.component';
@@ -18,6 +18,7 @@ import { ActivateComponent } from './components/user/activate/activate.component
 import { RegisterSuccessComponent } from './components/user/register-success/register-success.component';
 import { ContactComponent } from './components/website information/contact/contact.component';
 import { ReportComponent } from './components/website information/report/report.component';
+import { TeamRegisterComponent } from './components/teams/register/register.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,7 @@ import { ReportComponent } from './components/website information/report/report.
     AboutUsComponent,
     TeamsComponent,
     LoginComponent,
-    RegisterComponent,
+    UserRegisterComponent,
     ProfileComponent,
     BuildProjectComponent,
     MyTeamComponent,
@@ -36,9 +37,14 @@ import { ReportComponent } from './components/website information/report/report.
     RegisterSuccessComponent,
     ContactComponent,
     ReportComponent,
+    TeamRegisterComponent
   ],
   imports: [BrowserModule, AppRoutingModule, HttpClientModule],
   providers: [provideClientHydration()],
   bootstrap: [AppComponent],
+  exports: [
+    HeaderComponent,
+    FooterComponent
+  ]
 })
 export class AppModule { }

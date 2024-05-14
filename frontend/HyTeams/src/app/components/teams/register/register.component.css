@@ -1,0 +1,49 @@
+main {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    background: linear-gradient(to bottom, #264779, #7e90df);
+}
+
+label img {
+    width: 120px;
+    transition-duration: 500ms;
+} 
+
+.form label :hover {
+    cursor: pointer;
+    width: 150px;
+    transition-duration: 500ms;
+}
+
+.form input:checked + label img {
+    width: 150px;
+}
+
+input {
+    display: none;
+}
+
+.form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #325EA0;
+    border-radius: 10px;
+    padding: 20px;
+    margin: 20px;
+}
+
+.teamTypeSection {
+    background: #4780d6;
+    border-radius: 3px;
+}
+
+.teamTypeSection h3 {
+    color: white;
+    font-size: 1.5em;
+    margin: 10px;
+}
