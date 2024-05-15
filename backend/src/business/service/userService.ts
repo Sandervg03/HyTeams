@@ -47,8 +47,12 @@ export class UserService {
         }
     }
 
-    public async findUser(email: string): Promise<User | null> {
-        return this.data.findUser(email)
+    public async findUserByEmail(email: string): Promise<User | null> {
+        return this.data.findUserByEmail(email)
+    }
+
+    public async findUserByUsername(username: string): Promise<User | null> {
+        return this.data.findUserByUsername(username)
     }
 
     public async loginUser(email: string, password: string): Promise<string> {
@@ -64,6 +68,6 @@ export class UserService {
     }
 
     public async isLoggedIn(code: string): Promise<boolean> {
-        return await this.data.findSessionId(code);
+        return await this.data.isLoggedIn(code);
     }
 }

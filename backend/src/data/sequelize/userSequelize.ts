@@ -21,7 +21,7 @@ export class UserSequelize implements UserInterface {
     }
 
     public async getPasswordCode(code: string, email: string): Promise<string | null> {
-        const find: SequelizePasswordCodeModel | null = await SequelizePasswordCodeModel.findOne({ where: { code: code, email: email, status: "Active"} });
+        const find: SequelizePasswordCodeModel | null = await SequelizePasswordCodeModel.findOne({ where: { code: code, email: email, status: "Active" } });
         if (find && find.code) {
             return find.email;
         } else {
@@ -67,13 +67,21 @@ export class UserSequelize implements UserInterface {
         }
     }
 
-    public async findUser(email: string): Promise<User | null> {
+    public async findUserByEmail(email: string): Promise<User | null> {
         const find: SequelizeUserModel | null = await SequelizeUserModel.findOne({ where: { email: email } });
         if (find && find.email) {
             return this.userMapping.mapUser(find);
         } else {
             return null;
         }
+    }
+
+    public async findUserByUsername(username: string): Promise<User> {
+        const user: SequelizeUserModel | null = await SequelizeUserModel.findOne({ where: { username: username } });
+        if (user && user.email) {
+            return this.userMapping.mapUser(user);
+        }
+        throw new Error(`${username} not found`);
     }
 
     public async setSessionId(sessionId: string, email: string): Promise<string> {
@@ -86,7 +94,17 @@ export class UserSequelize implements UserInterface {
         }
     }
 
-    public async findSessionId(code: string): Promise<boolean> {
+    public async findUserBySessionId(sessionId: string): Promise<User> {
+        const user: SequelizeUserModel | null = await SequelizeUserModel.findOne({
+            include: [{ model: SequelizeSessionModel, where: { sessionid: sessionId } }]
+        });
+        if (user && user.email) {
+            return this.userMapping.mapUser(user);
+        }
+        throw new Error("User not found");
+    }
+
+    public async isLoggedIn(code: string): Promise<boolean> {
         const find: SequelizeSessionModel | null = await SequelizeSessionModel.findOne({ where: { sessionid: code } });
         if (find && find.sessionid) {
             return true;

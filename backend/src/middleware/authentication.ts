@@ -11,23 +11,42 @@ export class Authentication {
     constructor() { }
 
     public async isPasswordCode(req: express.Request, res: express.Response, next: express.NextFunction) {
-        if (!await new UserService(userData).findActivationCode(req.body._code, req.body._email)) {
-            res.status(400).json("Code not found.");
-        } else {
-            next();
-        }
-    }
-
-    public async isUser(req: express.Request, res: express.Response, next: express.NextFunction) {
-        if (validator.validate(req.body._email) == true) {
-            if (await new UserService(userData).findUser(req.body._email) == null) {
-                res.status(400).json("User not found.");
+        try {
+            if (!await new UserService(userData).findActivationCode(req.body._code, req.body._email)) {
+                res.status(400).json("Code not found.");
             } else {
                 next();
             }
-        } else {
-            res.status(400).json("Incorrect email.");
+        } catch (error: any) {
+            res.status(400).json(error.message);
+        }
+    }
 
+    public async isUserByEmail(req: express.Request, res: express.Response, next: express.NextFunction) {
+        try {
+            if (validator.validate(req.body._email) == true) {
+                if (await new UserService(userData).findUserByEmail(req.body._email) == null) {
+                    res.status(400).json("User not found.");
+                } else {
+                    next();
+                }
+            } else {
+                res.status(400).json("Incorrect email.");
+            }
+        } catch (error: any) {
+            res.status(400).json(error.message);
+        }
+    }
+
+    public async isLoggedIn(req: express.Request, res: express.Response, next: express.NextFunction) {
+        try {
+            if (req.cookies.sessionId && await new UserService(userData).isLoggedIn(req.cookies.sessionId)) {
+                next();
+            } else {
+                res.status(401).json("Not logged in.");
+            }
+        } catch (error: any) {
+            res.status(400).json(error.message);
         }
     }
 }

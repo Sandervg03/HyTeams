@@ -1,10 +1,12 @@
-import { Column, DataType, Model, Table } from "sequelize-typescript";
+import { BelongsTo, Column, DataType, ForeignKey, HasOne, Model, Table } from "sequelize-typescript";
+import SequelizeUserModel from "./userSequelizeModel";
 
 @Table({
     tableName: "sessions",
     timestamps: true
 })
 export default class SequelizeSessionModel extends Model {
+    @ForeignKey(() => SequelizeUserModel)
     @Column({
         type: DataType.STRING,
         allowNull: false,
@@ -28,4 +30,7 @@ export default class SequelizeSessionModel extends Model {
         allowNull: false
     })
     declare expires: Date;
+
+    @BelongsTo(() => SequelizeUserModel)
+    declare user: SequelizeUserModel;
 }
