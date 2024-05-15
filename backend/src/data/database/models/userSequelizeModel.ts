@@ -1,4 +1,7 @@
-import { Column, DataType, Model, Table } from "sequelize-typescript";
+import { BelongsTo, BelongsToMany, Column, DataType, HasOne, Model, Sequelize, Table } from "sequelize-typescript";
+import SequelizeTeamModel from "./teamSequelizeModel";
+import SequelizeUserTeamModel from "./userTeamsSequelizeModel";
+import SequelizeSessionModel from "./sessionSequelizeModel";
 
 @Table({
     tableName: "users",
@@ -30,4 +33,10 @@ export default class SequelizeUserModel extends Model {
         defaultValue: 'user'
     })
     declare role: string;
+
+    @BelongsToMany(() => SequelizeTeamModel, () => SequelizeUserTeamModel)
+    declare teams: SequelizeTeamModel[];
+
+    @HasOne(() => SequelizeSessionModel)
+    declare session: SequelizeSessionModel;
 }

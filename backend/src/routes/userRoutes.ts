@@ -19,7 +19,7 @@ app.post("/activateUser", authentication.isPasswordCode, (req, res) => {
     userController.activateUser(req, res);
 })
 
-app.post("/loginUser", authentication.isUser, (req, res) => {
+app.post("/loginUser", authentication.isUserByEmail, (req, res) => {
     userController.loginUser(req, res);
 });
 
