@@ -83,18 +83,6 @@ export class Team {
         }
     }
 
-    public async setType(type: string) {
-        if (type) {
-            if ((await this.service.getValidTeamTypes()).includes(type)) {
-                this._type = type;
-            } else {
-                throw new Error('Invalid team type');
-            }
-        } else {
-            throw new Error('Type is required');
-        }
-    }
-
     public set leader(leader: TeamMember) {
         if (leader) {
             if (leader instanceof TeamMember) {

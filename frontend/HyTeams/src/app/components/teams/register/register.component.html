@@ -11,5 +11,37 @@
                 <img src="../../../../assets/images/kuudraIcon.webp" alt="Kuudra">
             </label>
         </section>
+        <br>
+        <section class="teamNameSection">
+            <h3>What will be your team name?</h3>
+            <label for="teamName">Team Name: </label>
+            <input type="text" id="teamName" maxlength="255">
+        </section>
+        <br>
+        <section class="teamDescriptionSection">
+            <h3>Describe your team.</h3>
+            <label for="teamDescription">Team Description: </label>
+            <textarea id="teamDescription" maxlength="255"></textarea>
+        </section>
+        <br>
+        <section class="teamMembersSection">
+            <h3>Who will be in your team?</h3>
+            Search for your friends and add them to your team.<br>
+            <input type="text" class="teamMemberSearch" #teamMemberSearch>
+            <button type="button" class="teamMemberSearchButton"
+                (click)="searchTeamMember(teamMemberSearch.value)">Search</button>
+            <br>
+            <section class="teamMembers">
+                <section *ngFor="let member of members">
+                    {{member}} <button type="button" (click)="removeTeamMember(member)">Remove</button>
+                </section>
+            </section>
+        </section>
+        <br>
+        <section class="teamRegisterSection">
+            <h3>Register your team.</h3>
+            Register your team by pressing the register button. <br>
+            <button type="button" class="teamRegisterButton" (click)="registerTeam()">Register</button>
+        </section>
     </section>
 </main>

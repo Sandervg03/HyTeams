@@ -1,5 +1,4 @@
 import { BelongsToMany, Column, DataType, HasMany, Model, Table } from "sequelize-typescript";
-import { Team } from "../../../business/model/teamModel";
 import SequelizeUserModel from "./userSequelizeModel";
 import SequelizeUserTeamModel from "./userTeamsSequelizeModel";
 
