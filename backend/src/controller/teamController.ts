@@ -9,6 +9,22 @@ export class TeamController {
 
     constructor(private service: TeamService, private userData: UserSequelize = new UserSequelize()) { }
 
+    public async getValidTeamTypes(req: express.Request, res: express.Response) {
+        try {
+            res.status(200).json(await this.service.getValidTeamTypes());
+        } catch (error: any) {
+            res.status(400).json(error.message);
+        }
+    }
+    
+    public async getValidRoleTypes(req: express.Request, res: express.Response) {
+        try {
+            res.status(200).json(await this.service.getValidRoleTypes());
+        } catch (error: any) {
+            res.status(400).json(error.message);
+        }
+    }
+
     public async createTeam(req: express.Request, res: express.Response) {
         try {
             const memberPromises = req.body._members.map(async (member: { _username: string, _role: string }) => {

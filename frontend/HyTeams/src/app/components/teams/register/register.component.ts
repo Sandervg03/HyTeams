@@ -7,8 +7,22 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TeamRegisterComponent implements OnInit {
 
+  members: string[] = [];
+
   ngOnInit(): void {
     console.log('component initialized')
+  }
+
+  searchTeamMember(member: string) {
+    this.members.push(member)
+  }
+
+  removeTeamMember(member: string) {
+    this.members = this.members.filter(foo => foo !== member);
+  }
+
+  registerTeam() {
+    alert('registering team')
   }
 
 }

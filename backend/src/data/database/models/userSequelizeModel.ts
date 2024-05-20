@@ -18,7 +18,7 @@ export default class SequelizeUserModel extends Model {
     @Column({
         type: DataType.STRING,
         allowNull: false,
-        primaryKey: false
+        primaryKey: true
     })
     declare username: string;
 
